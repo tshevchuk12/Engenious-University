@@ -16,7 +16,7 @@ class LoginPage {
         await this.page.fill(loginPageSelectors.EMAIL_FIELD,email)
     };
     async setPassword(password:string){
-        await this.page.fill(loginPageSelectors.PASSWORD_FIELD,password)
+        await this.page.fill(loginPageSelectors.PASSWORD_FIELD,password) 
     };
     async clickSubmitButton(){
         await this.page.click(loginPageSelectors.SUBMIT_BUTTON)

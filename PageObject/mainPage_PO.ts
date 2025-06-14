@@ -14,7 +14,7 @@ class MainPage {
         await this.page.click(mainPageSelectors.BURGER_BUTTON)
     };
     async getProfileName(){
-        return this.page.innerText(mainPageSelectors.PROFILE_NAME)
+        return this.page.innerText(mainPageSelectors.PROFILE_NAME) 
     }
 }
 

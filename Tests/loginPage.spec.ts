@@ -21,6 +21,6 @@ test("Check the login process on Engenious University", async ({page})=> {
     const userName = await mainPage.getProfileName()
     expect(userName).toEqual(testData.profileName)
     
-    await page.screenshot({ path: "screenshots/login-success.png" })
-
+    await page.screenshot({ path: "screenshots/login-success.png" }) 
+ 
 })
