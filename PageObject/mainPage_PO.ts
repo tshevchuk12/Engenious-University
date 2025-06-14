@@ -2,18 +2,20 @@ import { Page} from "@playwright/test";
 import {mainPageSelectors} from "../Selectors/mainPageSelectors.ts"
 
 
-const createMainPage = (page : Page) => {
-    const mainPage ={    
-        clickBurgerButton: async() => {
-            await page.waitForSelector(mainPageSelectors.BURGER_BUTTON)
-            await page.click(mainPageSelectors.BURGER_BUTTON)
-        },
-        getProfileName:  () => {
-            return page.innerText(mainPageSelectors.PROFILE_NAME)
-        }
-        
+class MainPage {
+    private page: Page;
+
+    constructor(page: Page){
+        this.page = page;
     }
-    return mainPage
+
+    async clickBurgerButton(){
+        await this.page.waitForSelector(mainPageSelectors.BURGER_BUTTON)
+        await this.page.click(mainPageSelectors.BURGER_BUTTON)
+    };
+    async getProfileName(){
+        return this.page.innerText(mainPageSelectors.PROFILE_NAME)
+    }
 }
 
-export {createMainPage}
+export {MainPage}

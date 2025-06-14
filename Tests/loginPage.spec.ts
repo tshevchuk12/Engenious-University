@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 import {testData} from "../TestData/loginData.ts";
-import { createLoginPage} from '../PageObject/loginPage_PO'
-import { createMainPage} from '../PageObject/mainPage_PO'
+import { LoginPage} from '../PageObject/loginPage_PO'
+import { MainPage} from '../PageObject/mainPage_PO'
 
 
 
 test("Check the login process on Engenious University", async ({page})=> {
 
-    const loginPage = createLoginPage(page)
-    const mainPage = createMainPage(page)
+    const loginPage = new LoginPage(page)
+    const mainPage = new MainPage(page)
 
     await loginPage.openLoginPage()
 
