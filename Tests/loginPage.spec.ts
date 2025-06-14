@@ -4,7 +4,6 @@ import { LoginPage} from '../PageObject/loginPage_PO'
 import { MainPage} from '../PageObject/mainPage_PO'
 
 
-
 test("Check the login process on Engenious University", async ({page})=> {
 
     const loginPage = new LoginPage(page)

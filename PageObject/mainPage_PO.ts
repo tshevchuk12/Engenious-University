@@ -4,7 +4,7 @@ import {mainPageSelectors} from "../Selectors/mainPageSelectors.ts"
 
 class MainPage {
     private page: Page;
-
+і
     constructor(page: Page){
         this.page = page;
     }

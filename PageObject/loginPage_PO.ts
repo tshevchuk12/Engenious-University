@@ -3,7 +3,7 @@ import {loginPageSelectors} from "../Selectors/loginPageSelectors.ts"
 
 
 class LoginPage {
-    private page: Page;
+    private page: Page; 
 
 	constructor(page: Page) {
 		this.page = page;
