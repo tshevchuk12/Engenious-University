@@ -12,14 +12,19 @@ class LoginPage {
     async openLoginPage() {
            await this.page.goto('https://university.engenious.io/login', {waitUntil:"networkidle"})
     };
-    async setEmail(email:string) {
+
+    async loginWithEmail(email:string,password:string){
         await this.page.fill(loginPageSelectors.EMAIL_FIELD,email)
-    };
-    async setPassword(password:string){
-        await this.page.fill(loginPageSelectors.PASSWORD_FIELD,password) 
-    };
-    async clickSubmitButton(){
+        await this.page.fill(loginPageSelectors.PASSWORD_FIELD,password)
+
+        await this.page.waitForSelector(loginPageSelectors.SUBMIT_BUTTON)
         await this.page.click(loginPageSelectors.SUBMIT_BUTTON)
+    };
+
+    async getInvalidMessage(){
+        await this.page.waitForSelector('[role="alert"] div:last-child', { state: 'visible' });
+        return this.page.textContent('[role="alert"] div:last-child')
+
     }
 }
 
