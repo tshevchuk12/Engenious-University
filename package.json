@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test example.spec.ts",
+    "testAllWithAllureReporter": "(rimraf allure-results allure-report && playwright test loginPage.spec.ts --reporter=list,allure-playwright || true) && npm run report",
+    "report": "npx allure generate ./allure-results --clean && npx allure open",
+    "testAll": "playwright test",
     "LoginPage": "playwright test loginPage.spec.ts",
     "LoginPage-ui": "playwright test --ui loginPage.spec.ts"
   },
@@ -14,7 +16,9 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.51.1",
-    "@types/node": "^22.14.1"
+    "@types/node": "^22.14.1",
+    "allure-playwright": "^3.2.2",
+    "rimraf": "^6.0.1"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0"
