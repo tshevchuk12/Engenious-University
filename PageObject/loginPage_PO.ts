@@ -21,9 +21,9 @@ class LoginPage {
         await this.page.click(loginPageSelectors.SUBMIT_BUTTON)
     };
 
-    async getInvalidMessage(){
-        await this.page.waitForSelector('[role="alert"] div:last-child', { state: 'visible' });
-        return this.page.textContent('[role="alert"] div:last-child')
+    async getErrorMessage(){
+        await this.page.waitForSelector(loginPageSelectors.ERROR_MESSAGE, { state: 'visible' });
+        return this.page.textContent(loginPageSelectors.ERROR_MESSAGE)
 
     }
 }
