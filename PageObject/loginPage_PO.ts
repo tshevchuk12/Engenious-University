@@ -14,6 +14,7 @@ class LoginPage {
     };
 
     async loginWithEmail(email:string,password:string){
+        await this.openLoginPage()
         await this.page.fill(loginPageSelectors.EMAIL_FIELD,email)
         await this.page.fill(loginPageSelectors.PASSWORD_FIELD,password)
 
