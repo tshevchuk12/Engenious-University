@@ -19,11 +19,13 @@ const test = base.extend<Fixtures>({
 });
 
 test.afterEach(async ({ page }, testInfo) => {
-	const safeTitle = testInfo.title.replace(/[^a-zA-Z0-9-_]/g, '_');
-	await page.screenshot({
-		path: `screenshots/${safeTitle}.png`
-	});
+  if (testInfo.error) {
+    await testInfo.attach('screenshot', {
+      body: await page.screenshot(),
+      contentType: 'image/png'
+    });
+    
+  }
 });
-
 
 export { test, expect };

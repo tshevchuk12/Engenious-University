@@ -1,11 +1,12 @@
 import {validData, unregisteredData} from "../TestData/loginData.ts";
 import { test, expect } from '../Hooks/testHooks';
+import { attachScreenshot } from '../Utility/testUtility.ts';
 import { allure } from 'allure-playwright';
 
-test('Login with valid user', async ({ loginPage, mainPage, page }) => {
+test('Login with valid user on Engenious University', async ({ loginPage, mainPage, page}) => {
 
 try{
-	await allure.step('Login with valid credentials', async () => {
+	await allure.step('Login with valid credentials ', async () => {
 		await loginPage.loginWithEmail(validData.email, validData.password);
 	});
 
@@ -15,11 +16,12 @@ try{
 
 	await allure.step('Verify user is logged in', async () => {
 		const userName = await mainPage.getProfileName()
-        expect(userName).toEqual(validData.profileName)
+		expect(userName).toEqual(validData.profileName)
 	});
-} finally{
-    await allure.attachment('Screenshot', await page.screenshot(), 'image/png');
-}
+} catch (error) {
+    await attachScreenshot(page, 'Login failed screenshot');
+    throw error; 
+  }
 });
 
 
@@ -34,8 +36,9 @@ try{
 		 const errorMessage  = await loginPage.getErrorMessage()
     	expect(errorMessage).toEqual("Invalid credentials!")
 	});
-	} finally{
-		await allure.attachment('Screenshot', await page.screenshot(), 'image/png');
-	}
+	} catch (error) {
+    await attachScreenshot(page, 'Login failed screenshot');
+    throw error; 
+  }
     
 })
