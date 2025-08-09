@@ -1,21 +1,19 @@
-import { Page} from "@playwright/test";
-import {mainPageSelectors} from "../Selectors/mainPageSelectors.ts"
-
+import { Page } from "@playwright/test";
+import { mainPageSelectors } from "../Selectors/mainPageSelectors.ts";
 
 class MainPage {
-    private page: Page;
-і
-    constructor(page: Page){
-        this.page = page;
-    }
+  private page: Page;
+  і;
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-    async clickBurgerButton(){
-        await this.page.waitForSelector(mainPageSelectors.BURGER_BUTTON)
-        await this.page.click(mainPageSelectors.BURGER_BUTTON)
-    };
-    async getProfileName(){
-        return this.page.innerText(mainPageSelectors.PROFILE_NAME) 
-    }
+  async clickBurgerButton() {
+    await this.page.locator(mainPageSelectors.BURGER_BUTTON).click();
+  }
+  async getProfileName() {
+    return this.page.locator(mainPageSelectors.PROFILE_NAME).innerText();
+  }
 }
 
-export {MainPage}
+export { MainPage };
