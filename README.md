@@ -2,7 +2,7 @@
 
 This project contains automated UI tests for the Engenious University platform using Playwright with TypeScript.
 
-##  Setup Instructions
+## Setup Instructions
 
 ### Create test data
 

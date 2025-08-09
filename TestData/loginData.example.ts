@@ -1,18 +1,14 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
 const validData = {
-    email: "your_email@example.com",
-    password: "your_password",
-    profileName: "Your Name"
-}
+  email: "your_email@example.com",
+  password: "your_password",
+  profileName: "Your Name",
+};
 
 const unregisteredData = {
-    email: faker.internet.email(),
-    password: faker.internet.password()
-    
-}
+  email: faker.internet.email(),
+  password: faker.internet.password(),
+};
 
-export {validData, unregisteredData}
-
-
-
+export { validData, unregisteredData };
