@@ -1,5 +1,5 @@
-import { Page } from "@playwright/test";
-import { loginPageSelectors } from "../Selectors/loginPageSelectors.ts";
+import { Page } from '@playwright/test';
+import { loginPageSelectors } from '../Selectors/loginPageSelectors';
 
 class LoginPage {
   private page: Page;
@@ -9,15 +9,15 @@ class LoginPage {
   }
 
   async openLoginPage() {
-    await this.page.goto("https://university.engenious.io/login", {
-      waitUntil: "domcontentloaded",
+    await this.page.goto('https://university.engenious.io/login', {
+      waitUntil: 'domcontentloaded',
     });
   }
   async submitByClick() {
     await this.page.locator(loginPageSelectors.SUBMIT_BUTTON).click();
   }
   async submitByEnter() {
-    await this.page.keyboard.press("Enter");
+    await this.page.keyboard.press('Enter');
   }
 
   async fillEmail(email: string) {
@@ -33,27 +33,23 @@ class LoginPage {
     await this.fillEmail(email);
     await this.fillPassword(password);
 
-    if (submitType == "click Submit button") {
+    if (submitType == 'click') {
       await this.submitByClick();
-    } else if (submitType == "submit by Enter") {
+    } else if (submitType == 'enter') {
       await this.submitByEnter();
     }
   }
 
   async clickPasswordToggleButton() {
-    await this.page
-      .locator('[aria-label="toggle password visibility"]')
-      .click();
+    await this.page.locator(loginPageSelectors.TOGGLE_BUTTON).click();
   }
 
   async getPasswordStatus() {
-    return this.page
-      .locator(loginPageSelectors.PASSWORD_FIELD)
-      .getAttribute("type");
+    return this.page.locator(loginPageSelectors.PASSWORD_FIELD).getAttribute('type');
   }
 
-  async getErrorMessage() {
-    return this.page.locator(loginPageSelectors.ERROR_MESSAGE).textContent();
+  async getErrorMessage(selector: string) {
+    return this.page.locator(selector).innerText();
   }
 }
 

@@ -1,14 +1,28 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
-const validData = {
-  email: "your_email@example.com",
-  password: "your_password",
-  profileName: "Your Name",
+export const submitMethod = {
+  click: 'click',
+  enter: 'enter',
 };
 
-const unregisteredData = {
+export const validData = {
+  email: '96tania96@gmail.com',
+  password: 'Dtcyf12dtcyf!',
+  profileName: 'Tetiana Shevchuk',
+};
+
+export const unregisteredData = {
   email: faker.internet.email(),
-  password: faker.internet.password(),
+  password: 'Qwert12!Q',
 };
 
-export { validData, unregisteredData };
+export const invalidData = {
+  email: faker.internet.email().replace('.com', ''),
+  empty: '',
+};
+
+export const loginErrorMessages = {
+  invalidCredentials: 'Invalid credentials!',
+  emailErrorMessage: 'Invalid email address',
+  passwordErrorMessage: 'Password is required',
+};
