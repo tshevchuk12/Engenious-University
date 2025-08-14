@@ -1,10 +1,12 @@
 import { test as base, expect } from "@playwright/test";
 import { LoginPage } from "../PageObject/loginPage_PO";
 import { MainPage } from "../PageObject/mainPage_PO";
+import { LoginAPI } from "../APIClient/loginApi";
 
 type Fixtures = {
   loginPage: LoginPage;
   mainPage: MainPage;
+  loginAPI: LoginAPI;
 };
 
 const test = base.extend<Fixtures>({
@@ -15,6 +17,10 @@ const test = base.extend<Fixtures>({
   mainPage: async ({ page }, use) => {
     const mainPage = new MainPage(page);
     await use(mainPage);
+  },
+  loginAPI: async ({ request }, use) => {
+    const loginAPI = new LoginAPI(request);
+    await use(loginAPI);
   },
 });
 
