@@ -7,6 +7,6 @@ This project contains automated UI tests for the Engenious University platform u
 ### Create test data
 
 Inside `TestData/`, create a file named `loginData.ts` based on the provided template:  
-`TestData/loginData.example.ts`
+`TestData/authData.example.ts`
 
 `loginData.ts` is **excluded from version control** via `.gitignore` to avoid exposing credentials.
