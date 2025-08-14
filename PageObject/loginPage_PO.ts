@@ -1,6 +1,6 @@
-import { Page } from '@playwright/test';
-import { loginPageSelectors } from '../Selectors/loginPageSelectors';
-
+import { Page } from "@playwright/test";
+import { loginPageSelectors } from "../Selectors/loginPageSelectors";
+import { baseLoginUrl } from "../TestData/urls";
 class LoginPage {
   private page: Page;
 
@@ -9,15 +9,15 @@ class LoginPage {
   }
 
   async openLoginPage() {
-    await this.page.goto('https://university.engenious.io/login', {
-      waitUntil: 'domcontentloaded',
+    await this.page.goto(baseLoginUrl, {
+      waitUntil: "domcontentloaded",
     });
   }
   async submitByClick() {
     await this.page.locator(loginPageSelectors.SUBMIT_BUTTON).click();
   }
   async submitByEnter() {
-    await this.page.keyboard.press('Enter');
+    await this.page.keyboard.press("Enter");
   }
 
   async fillEmail(email: string) {
@@ -33,9 +33,9 @@ class LoginPage {
     await this.fillEmail(email);
     await this.fillPassword(password);
 
-    if (submitType == 'click') {
+    if (submitType == "click") {
       await this.submitByClick();
-    } else if (submitType == 'enter') {
+    } else if (submitType == "enter") {
       await this.submitByEnter();
     }
   }
@@ -45,7 +45,7 @@ class LoginPage {
   }
 
   async getPasswordStatus() {
-    return this.page.locator(loginPageSelectors.PASSWORD_FIELD).getAttribute('type');
+    return this.page.locator(loginPageSelectors.PASSWORD_FIELD).getAttribute("type");
   }
 
   async getErrorMessage(selector: string) {

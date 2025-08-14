@@ -1,5 +1,5 @@
-import { Page } from '@playwright/test';
-import { mainPageSelectors } from '../Selectors/mainPageSelectors';
+import { Page } from "@playwright/test";
+import { mainPageSelectors } from "../Selectors/mainPageSelectors";
 
 class MainPage {
   private page: Page;
