@@ -3,8 +3,12 @@ import { APIRequestContext, APIResponse } from "@playwright/test";
 class LoginAPI {
   constructor(private request: APIRequestContext) {}
 
+  async getBody(response: APIResponse): Promise<unknown> {
+    return response.json();
+  }
+
   async getToken(response: APIResponse): Promise<string> {
-    const body = await response.json();
+    const body = (await this.getBody(response)) as { accessToken: string };
     return body.accessToken;
   }
 

@@ -16,8 +16,12 @@ export const invalidData = {
   empty: "",
 };
 
-export const loginErrorMessages = {
+export const loginUIErrorMessages = {
   invalidCredentials: "Invalid credentials!",
   emailErrorMessage: "Invalid email address",
   passwordErrorMessage: "Password is required",
+};
+
+export const loginAPIErrorMessages = {
+  invalidCredentials: { message: "Invalid credentials!", error: "Unauthorized", statusCode: 401 },
 };

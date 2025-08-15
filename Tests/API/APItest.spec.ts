@@ -1,4 +1,4 @@
-import { validData } from "../../TestData/authData.ts";
+import { validData, unregisteredData, loginAPIErrorMessages } from "../../TestData/authData.ts";
 import { tokenFormat } from "../../TestData/regexConstants.ts";
 import { baseAPIUrl, loginAPIUrl } from "../../TestData/urls.ts";
 import { APIResponse } from "@playwright/test";
@@ -36,6 +36,34 @@ test.describe("1. API Cases: Login page", () => {
       const path = await loginAPI.getUserProfilePath(token);
       const profileResponse = await loginAPI.getProfileResponse(request, path, token, baseAPIUrl);
       expect(profileResponse.status()).toBe(200);
+    });
+  });
+
+  test("1.2 Check login with unregistered credentials | @negativeCases ", async ({ request, loginAPI }) => {
+    setAllureTags(["negativeCases", "smoke"]);
+
+    let response: APIResponse;
+    await allure.step("Login with unregistered credentials", async () => {
+      response = await request.post(loginAPIUrl, {
+        data: {
+          email: unregisteredData.email,
+          password: unregisteredData.password,
+        },
+      });
+    });
+
+    await allure.step("Validate login response status and headers", async () => {
+      expect(response.status()).toBe(401);
+
+      const headers = response.headers();
+      expect(headers["content-type"]).toContain("application/json");
+      expect(headers["authorization"]).toBeUndefined();
+      expect(headers["set-cookie"]).toBeUndefined();
+    });
+
+    await allure.step("Verify error response body (invalidCredentials)", async () => {
+      const body = await loginAPI.getBody(response);
+      expect(body).toEqual(loginAPIErrorMessages.invalidCredentials);
     });
   });
 });
