@@ -1,4 +1,4 @@
-import { validData, unregisteredData, invalidData, loginErrorMessages } from "../../TestData/authData";
+import { validData, unregisteredData, invalidData, loginUIErrorMessages } from "../../TestData/authData";
 import { submitMethod } from "../../TestData/loginConfig";
 import { loginPageSelectors } from "../../Selectors/loginPageSelectors";
 import { test, expect } from "../../Hooks/testHooks";
@@ -94,7 +94,7 @@ test.describe("2. Negative Cases", () => {
       await allure.step("Verify error message for invalid login", async () => {
         try {
           const errorMessage = await loginPage.getErrorMessage(loginPageSelectors.INVALID_CREDENTIALS_ERROR_MESSAGE);
-          expect(errorMessage).toEqual(loginErrorMessages.invalidCredentials);
+          expect(errorMessage).toEqual(loginUIErrorMessages.invalidCredentials);
         } catch (error) {
           await attachScreenshot(page, "Screenshot on failure");
           throw error;
@@ -113,10 +113,10 @@ test.describe("2. Negative Cases", () => {
     await allure.step("Verify error messages for invalid login", async () => {
       try {
         const emailErrorMessage = await loginPage.getErrorMessage(loginPageSelectors.INVALID_EMAIL_ERROR_MESSAGE);
-        expect(emailErrorMessage).toEqual(loginErrorMessages.emailErrorMessage);
+        expect(emailErrorMessage).toEqual(loginUIErrorMessages.emailErrorMessage);
 
         const passwordErrorMessage = await loginPage.getErrorMessage(loginPageSelectors.INVALID_PASSWORD_ERROR_MESSAGE);
-        expect(passwordErrorMessage).toEqual(loginErrorMessages.passwordErrorMessage);
+        expect(passwordErrorMessage).toEqual(loginUIErrorMessages.passwordErrorMessage);
       } catch (error) {
         await attachScreenshot(page, "Screenshot on failure");
         throw error;
@@ -130,14 +130,14 @@ test.describe("2. Negative Cases", () => {
       email: validData.email,
       password: invalidData.empty,
       errorMessageSelector: loginPageSelectors.INVALID_PASSWORD_ERROR_MESSAGE,
-      errorMessageText: loginErrorMessages.passwordErrorMessage,
+      errorMessageText: loginUIErrorMessages.passwordErrorMessage,
     },
     {
       description: "2.5 Check login with invalid email format",
       email: invalidData.email,
       password: unregisteredData.password,
       errorMessageSelector: loginPageSelectors.INVALID_EMAIL_ERROR_MESSAGE,
-      errorMessageText: loginErrorMessages.emailErrorMessage,
+      errorMessageText: loginUIErrorMessages.emailErrorMessage,
     },
   ];
 
