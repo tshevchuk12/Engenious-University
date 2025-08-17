@@ -67,6 +67,25 @@ test.describe("1. Positive Cases", () => {
       }
     });
   });
+
+  test("1.4 Check trims email before sending (JSON payload) | @positiveCases", async ({ page, loginPage }) => {
+    setAllureTags(["positiveCases"]);
+    type LoginPayload = { email: string; password: string };
+    let sent: LoginPayload | null = null;
+
+    await page.route("**/auth/login", async (route) => {
+      sent = route.request().postDataJSON();
+      await route.continue();
+    });
+
+    await loginPage.loginWithEmail(`  ${validData.email}  `, validData.password, submitMethod.click);
+
+    expect(sent).toBeTruthy();
+    expect(sent!.email).toBe(validData.email);
+    expect(sent!.password).toBe(validData.password);
+
+    await page.unroute("**/auth/login");
+  });
 });
 
 test.describe("2. Negative Cases", () => {
