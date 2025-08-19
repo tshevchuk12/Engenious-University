@@ -9,4 +9,4 @@ screenshots/
 TestData/authData.ts
 allure-report/
 allure-results/
-"TestData/authData.ts" 
+"TestData/authData.example.ts" 
