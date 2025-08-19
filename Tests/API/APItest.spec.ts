@@ -8,6 +8,7 @@ import { allure } from "allure-playwright";
 
 test.describe("1. API Cases: Login page", () => {
   test("1.1 Check successful login + token validation | @positiveCases @requiresData", async ({ request, loginAPI }) => {
+    test.skip(!validData.email || !validData.password, "validData not provided");
     setAllureTags(["positiveCases", "smoke"]);
 
     let response: APIResponse;

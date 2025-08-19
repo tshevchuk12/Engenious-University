@@ -20,6 +20,7 @@ test.describe("1. Positive Cases", () => {
 
   loginMethods.forEach(({ method, description }) => {
     test(description, async ({ loginPage, mainPage, page }) => {
+      test.skip(!validData.email || !validData.password, "validData not provided");
       setAllureTags(["positiveCases", "regression", "smoke"]);
 
       await allure.step("Successful user login", async () => {
@@ -69,6 +70,7 @@ test.describe("1. Positive Cases", () => {
   });
 
     test("1.4 Check trims email before sending (JSON payload) | @positiveCases @requiresData", async ({ page, loginPage }) => {
+      test.skip(!validData.email || !validData.password, "validData not provided");
       setAllureTags(["positiveCases"]);
       type LoginPayload = { email: string; password: string };
       let sent: LoginPayload | null = null;
