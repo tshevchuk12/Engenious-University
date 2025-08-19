@@ -20,7 +20,7 @@ test.describe("1. Positive Cases", () => {
 
   loginMethods.forEach(({ method, description }) => {
     test(description, async ({ loginPage, mainPage, page }) => {
-      test.skip(!validData.email || !validData.password, "validData not provided");
+      test.skip(validData.email === "your_email@example.com" || validData.password === "your_password" || validData.profileName === "Your Name", "validData not provided");
       setAllureTags(["positiveCases", "regression", "smoke"]);
 
       await allure.step("Successful user login", async () => {
@@ -69,25 +69,25 @@ test.describe("1. Positive Cases", () => {
     });
   });
 
-    test("1.4 Check trims email before sending (JSON payload) | @positiveCases @requiresData", async ({ page, loginPage }) => {
-      test.skip(!validData.email || !validData.password, "validData not provided");
-      setAllureTags(["positiveCases"]);
-      type LoginPayload = { email: string; password: string };
-      let sent: LoginPayload | null = null;
+  test("1.4 Check trims email before sending (JSON payload) | @positiveCases @requiresData", async ({ page, loginPage }) => {
+    test.skip(validData.email === "your_email@example.com" || validData.password === "your_password", "validData not provided");
+    setAllureTags(["positiveCases"]);
+    type LoginPayload = { email: string; password: string };
+    let sent: LoginPayload | null = null;
 
-      await page.route("**/auth/login", async (route) => {
-        sent = route.request().postDataJSON();
-        await route.continue();
-      });
-
-      await loginPage.loginWithEmail(`  ${validData.email}  `, validData.password, submitMethod.click);
-
-      expect(sent).toBeTruthy();
-      expect(sent!.email).toBe(validData.email);
-      expect(sent!.password).toBe(validData.password);
-
-      await page.unroute("**/auth/login");
+    await page.route("**/auth/login", async (route) => {
+      sent = route.request().postDataJSON();
+      await route.continue();
     });
+
+    await loginPage.loginWithEmail(`  ${validData.email}  `, validData.password, submitMethod.click);
+
+    expect(sent).toBeTruthy();
+    expect(sent!.email).toBe(validData.email);
+    expect(sent!.password).toBe(validData.password);
+
+    await page.unroute("**/auth/login");
+  });
 });
 
 test.describe("2. Negative Cases", () => {
