@@ -6,41 +6,41 @@ import { attachScreenshot, setAllureTags } from "../../Utility/testUtility";
 import { allure } from "allure-playwright";
 
 test.describe("1. Positive Cases", () => {
-  // const loginMethods = [
-  //   {
-  //     method: submitMethod.click,
-  //     description: "1.1 Check successful login via Submit button | @positiveCases",
-  //   },
+  const loginMethods = [
+    {
+      method: submitMethod.click,
+      description: "1.1 Check successful login via Submit button | @positiveCases @requiresData",
+    },
 
-  //   {
-  //     method: submitMethod.enter,
-  //     description: "1.2 Check successful login via Enter key | @positiveCases",
-  //   },
-  // ];
+    {
+      method: submitMethod.enter,
+      description: "1.2 Check successful login via Enter key | @positiveCases @requiresData",
+    },
+  ];
 
-  // loginMethods.forEach(({ method, description }) => {
-  //   test(description, async ({ loginPage, mainPage, page }) => {
-  //     setAllureTags(["positiveCases", "regression", "smoke"]);
+  loginMethods.forEach(({ method, description }) => {
+    test(description, async ({ loginPage, mainPage, page }) => {
+      setAllureTags(["positiveCases", "regression", "smoke"]);
 
-  //     await allure.step("Successful user login", async () => {
-  //       await loginPage.loginWithEmail(validData.email, validData.password, method);
-  //     });
+      await allure.step("Successful user login", async () => {
+        await loginPage.loginWithEmail(validData.email, validData.password, method);
+      });
 
-  //     await allure.step("Open user menu", async () => {
-  //       await mainPage.clickBurgerButton();
-  //     });
+      await allure.step("Open user menu", async () => {
+        await mainPage.clickBurgerButton();
+      });
 
-  //     await allure.step("Verify user is logged in", async () => {
-  //       try {
-  //         const userName = await mainPage.getProfileName();
-  //         expect(userName).toEqual(validData.profileName);
-  //       } catch (error) {
-  //         await attachScreenshot(page, "Screenshot on failure");
-  //         throw error;
-  //       }
-  //     });
-  //   });
-  // });
+      await allure.step("Verify user is logged in", async () => {
+        try {
+          const userName = await mainPage.getProfileName();
+          expect(userName).toEqual(validData.profileName);
+        } catch (error) {
+          await attachScreenshot(page, "Screenshot on failure");
+          throw error;
+        }
+      });
+    });
+  });
 
   test("1.3 Check password visibility switches to text | @positiveCases", async ({ loginPage, page }) => {
     setAllureTags(["positiveCases", "regression"]);
@@ -68,24 +68,24 @@ test.describe("1. Positive Cases", () => {
     });
   });
 
-  //   test("1.4 Check trims email before sending (JSON payload) | @positiveCases", async ({ page, loginPage }) => {
-  //     setAllureTags(["positiveCases"]);
-  //     type LoginPayload = { email: string; password: string };
-  //     let sent: LoginPayload | null = null;
+    test("1.4 Check trims email before sending (JSON payload) | @positiveCases @requiresData", async ({ page, loginPage }) => {
+      setAllureTags(["positiveCases"]);
+      type LoginPayload = { email: string; password: string };
+      let sent: LoginPayload | null = null;
 
-  //     await page.route("**/auth/login", async (route) => {
-  //       sent = route.request().postDataJSON();
-  //       await route.continue();
-  //     });
+      await page.route("**/auth/login", async (route) => {
+        sent = route.request().postDataJSON();
+        await route.continue();
+      });
 
-  //     await loginPage.loginWithEmail(`  ${validData.email}  `, validData.password, submitMethod.click);
+      await loginPage.loginWithEmail(`  ${validData.email}  `, validData.password, submitMethod.click);
 
-  //     expect(sent).toBeTruthy();
-  //     expect(sent!.email).toBe(validData.email);
-  //     expect(sent!.password).toBe(validData.password);
+      expect(sent).toBeTruthy();
+      expect(sent!.email).toBe(validData.email);
+      expect(sent!.password).toBe(validData.password);
 
-  //     await page.unroute("**/auth/login");
-  //   });
+      await page.unroute("**/auth/login");
+    });
 });
 
 test.describe("2. Negative Cases", () => {

@@ -27,8 +27,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests (with Allure reporter)
-        run: npm test -- --reporter=line,allure-playwright
+      - name: Run Playwright tests (no secrets)
+        run: npm run test:no-secrets -- --reporter=line,html,allure-playwright
 
       - name: Generate Allure report
         if: always()
@@ -64,7 +64,7 @@ jobs:
   deploy-allure:
     needs: tests
     runs-on: ubuntu-latest
-    if: always()  # деплоїмо навіть якщо тести впали, щоб подивитись звіт
+    if: always()  
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
