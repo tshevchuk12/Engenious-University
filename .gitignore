@@ -8,4 +8,4 @@ node_modules/
 screenshots/
 allure-report/
 allure-results/
-"TestData/authDataExample.ts" 
+TestData/authDataExample.ts
