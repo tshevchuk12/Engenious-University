@@ -6,7 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 screenshots/
-TestData/authData.ts
 allure-report/
 allure-results/
 "TestData/authData.example.ts" 
